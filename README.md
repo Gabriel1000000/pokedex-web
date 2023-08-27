@@ -1,0 +1,2 @@
+# pokedex
+ Recriando uma pokedex
