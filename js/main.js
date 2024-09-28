@@ -26,14 +26,22 @@ const renderPokemon = async (pokemon) => {
     pokemonNumber.innerHTML='';
     // Como a const embaixo é uma função assincrona, tem que colocar a função "renderPokemon" assincrona tambem.
     const dados = await fetchPokemon(pokemon);
-    if(dados){
+    if(dados['sprites']['versions']['generation-v']['black-white']['animated']['front_default']){
         pokemonImg.innerHTML='block';
         pokemonName.innerHTML = dados.name;
         pokemonNumber.innerHTML = dados.id;
         pokemonImg.src = dados['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
         // Esse "pokemonImg.src = dados['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];" está trazendo o caminho da api onde estão guardadas as imagens dos pokemons.
         pokeNumber=dados.id;
-    }else{
+    }else if(dados)    {
+        pokemonImg.innerHTML='block';
+        pokemonName.innerHTML = dados.name;
+        pokemonNumber.innerHTML = dados.id;
+        pokemonImg.src = dados['sprites']['front_default'];
+        // Esse "pokemonImg.src = dados['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];" está trazendo o caminho da api onde estão guardadas as imagens dos pokemons.
+        pokeNumber=dados.id;
+    }
+    else{
         pokemonImg.innerHTML='none';
         pokemonName.innerHTML = "Not found!";
         pokemonNumber.innerHTML = ":(";
